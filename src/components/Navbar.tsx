@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { links } from "@/config/links";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navTabs = [
   { label: "Home", href: "#home" },
@@ -37,10 +38,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50 bg-black border-b-2 border-black"
-      style={{ boxShadow: "0 4px 0 #000" }}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-bg border-b border-edge">
       <nav className="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
         {/* Desktop tabs */}
         <ul className="hidden md:flex items-center gap-1">
@@ -53,13 +51,13 @@ export default function Navbar() {
                   href={tab.href}
                   className={`relative px-3 py-1.5 text-sm font-semibold transition-colors duration-150 ${
                     isActive
-                      ? "text-accent-orange"
-                      : "text-cream hover:text-accent-orange"
+                      ? "text-accent"
+                      : "text-fg-muted hover:text-accent"
                   }`}
                 >
                   {tab.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-accent-orange" />
+                    <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-accent" />
                   )}
                 </a>
               </li>
@@ -67,7 +65,7 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Social links */}
+        {/* Social links + theme toggle */}
         <div className="hidden md:flex items-center gap-3 ml-auto">
           {links.map((link) => (
             <a
@@ -75,17 +73,20 @@ export default function Navbar() {
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="px-3 py-1 text-xs font-semibold border border-cream text-cream
-                         hover:bg-cream hover:text-black transition-colors duration-150"
+              className="px-3 py-1 text-xs font-semibold border border-edge text-fg-muted
+                         hover:bg-surface hover:text-fg transition-colors duration-150"
             >
               {link.label}
             </a>
           ))}
+          <div className="ml-2">
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Mobile: hamburger */}
         <button
-          className="md:hidden text-cream font-black text-xl leading-none"
+          className="md:hidden text-fg font-black text-xl leading-none"
           onClick={() => setMenuOpen((o) => !o)}
           aria-label="Toggle menu"
         >
@@ -95,7 +96,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-black border-t-2 border-cream/20 px-6 pb-4">
+        <div className="md:hidden bg-bg border-t border-edge px-6 pb-4">
           <ul className="flex flex-col gap-1 pt-2">
             {navTabs.map((tab) => {
               const id = tab.href.slice(1);
@@ -105,7 +106,7 @@ export default function Navbar() {
                     href={tab.href}
                     onClick={() => setMenuOpen(false)}
                     className={`block py-2 text-sm font-semibold ${
-                      active === id ? "text-accent-orange" : "text-cream"
+                      active === id ? "text-accent" : "text-fg-muted"
                     }`}
                   >
                     {tab.label}
@@ -114,18 +115,19 @@ export default function Navbar() {
               );
             })}
           </ul>
-          <div className="flex gap-3 mt-3 pt-3 border-t border-cream/20">
+          <div className="flex items-center gap-3 mt-3 pt-3 border-t border-edge">
             {links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs font-semibold text-cream underline"
+                className="text-xs font-semibold text-fg-muted underline"
               >
                 {link.label}
               </a>
             ))}
+            <ThemeToggle />
           </div>
         </div>
       )}

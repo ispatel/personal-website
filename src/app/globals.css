@@ -1,21 +1,53 @@
 @import "tailwindcss";
 
-@theme {
-  --color-cream: #efefea;
-  --color-accent-orange: #ff612f;
-  --color-accent-purple: #d0b4f4;
-  --color-accent-yellow: #ffc52f;
-  --font-archivo: var(--font-archivo);
-  --font-dela: var(--font-dela);
+/* ── Design tokens ──────────────────────────────────────────────── */
+:root {
+  --bg:       #F7F7F5;
+  --surface:  #EFEFED;
+  --fg:       #111110;
+  --fg-muted: #6B6B68;
+  --edge:     #D4D4CF;
+  --accent:   #3B6ECC;
 }
 
+.dark {
+  --bg:       #0F0F0E;
+  --surface:  #1A1A19;
+  --fg:       #EDEDEB;
+  --fg-muted: #8A8A87;
+  --edge:     #2A2A28;
+  --accent:   #6B9FE8;
+}
+
+/* ── Tailwind v4: expose tokens as utilities ────────────────────── */
+@theme inline {
+  --color-bg:       var(--bg);
+  --color-surface:  var(--surface);
+  --color-fg:       var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-edge:     var(--edge);
+  --color-accent:   var(--accent);
+
+  --font-archivo: var(--font-archivo);
+  --font-dela:    var(--font-dela);
+}
+
+/* ── Base ───────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 3.5rem; /* 56px = h-14 navbar */
 }
 
 body {
-  background-color: #efefea;
-  color: #000000;
+  background-color: var(--bg);
+  color: var(--fg);
   font-family: var(--font-archivo), Arial, sans-serif;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+/* ── Hairline divider ───────────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--edge);
+  opacity: 0.6;
 }
