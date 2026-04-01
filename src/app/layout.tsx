@@ -39,8 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-      <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${archivo.variable} ${delaGothicOne.variable} antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>

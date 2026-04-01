@@ -17,12 +17,15 @@ const ThemeContext = createContext<ThemeContextValue>({
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
 
-  // Sync React state with what the anti-FOUC inline script already applied
+  // Sync React state with what the anti-FOUC inline script already applied.
+  // Reading localStorage can only happen client-side after hydration, so setState
+  // inside this effect is intentional — it avoids a hydration mismatch.
   useEffect(() => {
     const stored = localStorage.getItem('theme') as Theme | null;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const resolved: Theme =
       stored === 'dark' || stored === 'light' ? stored : prefersDark ? 'dark' : 'light';
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(resolved);
   }, []);
 

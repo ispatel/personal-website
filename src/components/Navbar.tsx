@@ -73,8 +73,7 @@ export default function Navbar() {
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="px-3 py-1 text-xs font-semibold border border-edge text-fg-muted
-                         hover:bg-surface hover:text-fg transition-colors duration-150"
+              className="px-3 py-1 text-xs font-semibold border border-edge text-fg-muted hover:bg-surface hover:text-fg transition-colors duration-150"
             >
               {link.label}
             </a>
