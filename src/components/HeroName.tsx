@@ -78,25 +78,52 @@ export function HeroName({ name }: { name: string }) {
     };
   }, [name]);
 
-  return (
-    <h1
-      className="text-6xl sm:text-8xl lg:text-[9rem] leading-none tracking-tight"
-      style={{ fontFamily: "var(--font-dela)" }}
-    >
-      {states.map((s, i) =>
-        s.char === " " ? (
-          <span key={i}>&nbsp;</span>
-        ) : (
+  // Group characters into words so the browser can only break at spaces,
+  // not between individual character spans (which are inline-block).
+  const nodes: React.ReactNode[] = [];
+  let wordChars: CharState[] = [];
+  let wordStart = 0;
+
+  const flushWord = () => {
+    if (wordChars.length === 0) return;
+    const chars = wordChars;
+    const start = wordStart;
+    nodes.push(
+      <span key={`w-${start}`} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+        {chars.map((s, ci) => (
           <span
-            key={i}
+            key={start + ci}
             className={`inline-block transition-colors duration-300 ${
               s.locked ? "text-fg" : "text-accent"
             }`}
           >
             {s.char}
           </span>
-        )
-      )}
+        ))}
+      </span>
+    );
+    wordChars = [];
+  };
+
+  states.forEach((s, i) => {
+    if (s.char === " ") {
+      flushWord();
+      // Regular space — a valid line-break opportunity between words
+      nodes.push(<span key={`sp-${i}`}>{" "}</span>);
+      wordStart = i + 1;
+    } else {
+      if (wordChars.length === 0) wordStart = i;
+      wordChars.push(s);
+    }
+  });
+  flushWord();
+
+  return (
+    <h1
+      className="text-6xl sm:text-8xl lg:text-[9rem] leading-none tracking-tight"
+      style={{ fontFamily: "var(--font-dela)" }}
+    >
+      {nodes}
     </h1>
   );
 }
