@@ -140,12 +140,23 @@ export default function HomePage() {
               <ScrollReveal key={`${job.role}-${job.company}`} delay={i * 90}>
                 <div
                   className="p-5 border border-edge bg-surface"
-                  style={{ borderLeft: `3px solid ${['var(--accent)', 'var(--accent-2)', 'var(--accent-3)'][i % 3]}` }}
+                  style={{ borderLeft: `3px solid ${job.borderColor ?? ['var(--accent)', 'var(--accent-2)', 'var(--accent-3)'][i % 3]}` }}
                 >
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <h3 className="text-base font-black text-fg">
                       {job.role}{" "}
-                      <span className="font-semibold text-accent">@ {job.company}</span>
+                      {job.companyUrl ? (
+                        <a
+                          href={job.companyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-accent hover:opacity-70 transition-opacity duration-150"
+                        >
+                          @ {job.company}
+                        </a>
+                      ) : (
+                        <span className="font-semibold text-accent">@ {job.company}</span>
+                      )}
                     </h3>
                     <span className="text-xs font-semibold border border-edge text-fg-muted px-2 py-0.5 bg-surface">
                       {job.period}

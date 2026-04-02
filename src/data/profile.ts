@@ -51,6 +51,9 @@ export type Experience = {
   role: string;
   // LinkedIn: position.company.name
   company: string;
+  companyUrl?: string;
+  // Override for the left-border accent color on the experience card
+  borderColor?: string;
   // LinkedIn: position.startDate / position.endDate  (formatted as "Mon YYYY – Mon YYYY")
   period: string;
   // LinkedIn: position.description  (split into bullet array)
@@ -61,6 +64,8 @@ export const experience: Experience[] = [
   {
     role: "Software Engineering Intern (Year-Round)",
     company: "SAS Institute",
+    companyUrl: "https://www.sas.com",
+    borderColor: "#0067B9",
     period: "May 2023 – Present",
     bullets: [
       "Developed a deep learning model using TensorFlow to synthesize over 9 terabytes of time-series data for large-scale ML workloads.",
@@ -73,6 +78,8 @@ export const experience: Experience[] = [
   {
     role: "Lead Python Teaching Assistant",
     company: "North Carolina State University",
+    companyUrl: "https://www.ncsu.edu",
+    borderColor: "#CC0000",
     period: "May 2023 – Dec 2023",
     bullets: [
       "Directed a team of 9 TAs overseeing grading for 190+ students across assignments, assessments, and projects.",
@@ -82,6 +89,8 @@ export const experience: Experience[] = [
   {
     role: "Python Teaching Assistant",
     company: "North Carolina State University",
+    companyUrl: "https://www.ncsu.edu",
+    borderColor: "#CC0000",
     period: "Jan 2023 – May 2023",
     bullets: [
       "Conducted weekly lab sessions for 30+ students with an emphasis on hands-on, interactive learning.",
