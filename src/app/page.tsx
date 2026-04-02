@@ -17,6 +17,8 @@ export default function HomePage() {
         id="home"
         className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-bg"
       >
+        {/* color glow layer */}
+        <div className="hero-glow absolute inset-0 pointer-events-none" />
         {/* dot-grid background */}
         <div
           className="absolute inset-0"
@@ -52,7 +54,10 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
             <SectionHeading>About</SectionHeading>
-            <p className="mt-6 text-base md:text-lg leading-relaxed text-fg-muted">
+            <p
+              className="mt-6 text-base md:text-lg leading-relaxed text-fg-muted pl-4"
+              style={{ borderLeft: '2px solid var(--accent-2)' }}
+            >
               {site.bio}
             </p>
           </ScrollReveal>
@@ -68,7 +73,10 @@ export default function HomePage() {
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {skills.map((group, i) => (
               <ScrollReveal key={group.category} delay={i * 75}>
-                <div className="p-5 border border-edge bg-surface h-full">
+                <div
+                  className="p-5 border border-edge bg-surface h-full"
+                  style={{ borderTop: `2px solid ${['var(--accent)', 'var(--accent-2)', 'var(--accent-3)'][i % 3]}` }}
+                >
                   <h3 className="text-xs font-black uppercase tracking-widest text-fg-muted mb-3">
                     {group.category}
                   </h3>
@@ -93,7 +101,10 @@ export default function HomePage() {
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
             {projects.map((project, i) => (
               <ScrollReveal key={project.name} delay={i * 90}>
-                <article className="p-5 border border-edge bg-surface h-full">
+                <article
+                  className="p-5 border border-edge bg-surface h-full"
+                  style={{ borderTop: `2px solid ${i % 2 === 0 ? 'var(--accent)' : 'var(--accent-2)'}` }}
+                >
                   <h3 className="text-lg font-black leading-tight text-fg">{project.name}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-fg-muted">{project.description}</p>
                   <div className="mt-3 flex flex-wrap gap-2">
@@ -127,7 +138,10 @@ export default function HomePage() {
           <div className="mt-8 space-y-6">
             {experience.map((job, i) => (
               <ScrollReveal key={`${job.role}-${job.company}`} delay={i * 90}>
-                <div className="p-5 border border-edge bg-surface">
+                <div
+                  className="p-5 border border-edge bg-surface"
+                  style={{ borderLeft: `3px solid ${['var(--accent)', 'var(--accent-2)', 'var(--accent-3)'][i % 3]}` }}
+                >
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <h3 className="text-base font-black text-fg">
                       {job.role}{" "}
@@ -159,6 +173,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
       className="text-4xl md:text-5xl text-fg"
       style={{ fontFamily: "var(--font-dela)" }}
     >
+      <span className="block w-8 h-0.5 bg-accent mb-4" aria-hidden="true" />
       {children}
     </h2>
   );

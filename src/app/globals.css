@@ -2,21 +2,25 @@
 
 /* ── Design tokens ──────────────────────────────────────────────── */
 :root {
-  --bg:       #F7F7F5;
-  --surface:  #EFEFED;
-  --fg:       #111110;
-  --fg-muted: #6B6B68;
-  --edge:     #D4D4CF;
-  --accent:   #3B6ECC;
+  --bg:         #F7F7F5;
+  --surface:    #EFEFED;
+  --fg:         #111110;
+  --fg-muted:   #6B6B68;
+  --edge:       #D4D4CF;
+  --accent:     #2B5BB5;
+  --accent-2:   #0E7490;
+  --accent-3:   #7C3AED;
 }
 
 .dark {
-  --bg:       #0F0F0E;
-  --surface:  #1A1A19;
-  --fg:       #EDEDEB;
-  --fg-muted: #8A8A87;
-  --edge:     #2A2A28;
-  --accent:   #6B9FE8;
+  --bg:         #0F0F0E;
+  --surface:    #1A1A19;
+  --fg:         #EDEDEB;
+  --fg-muted:   #8A8A87;
+  --edge:       #2A2A28;
+  --accent:     #6B9FE8;
+  --accent-2:   #22D3EE;
+  --accent-3:   #A78BFA;
 }
 
 /* ── Tailwind v4: expose tokens as utilities ────────────────────── */
@@ -27,6 +31,8 @@
   --color-fg-muted: var(--fg-muted);
   --color-edge:     var(--edge);
   --color-accent:   var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
 
   --font-archivo: var(--font-archivo);
   --font-dela:    var(--font-dela);
@@ -43,6 +49,23 @@ body {
   color: var(--fg);
   font-family: var(--font-archivo), Arial, sans-serif;
   transition: background-color 200ms ease, color 200ms ease;
+}
+
+/* ── TechBadge: accessible brand colors ────────────────────────── */
+/* Colored badges: fg text in light (accessibility), brand color in dark */
+.tech-badge-colored       { color: var(--fg); }
+.dark .tech-badge-colored { color: var(--badge-color); }
+
+/* ── Hero color glow ────────────────────────────────────────────── */
+.hero-glow {
+  background:
+    radial-gradient(ellipse 75% 65% at 8% 65%, rgba(43, 91, 181, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 50% at 90% 30%, rgba(14, 116, 144, 0.06) 0%, transparent 60%);
+}
+.dark .hero-glow {
+  background:
+    radial-gradient(ellipse 75% 65% at 8% 65%, rgba(107, 159, 232, 0.11) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 50% at 90% 30%, rgba(34, 211, 238, 0.08) 0%, transparent 60%);
 }
 
 /* ── Hairline divider ───────────────────────────────────────────── */
