@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
+import { HeroName } from "@/components/HeroName";
 import { TechBadge } from "@/components/TechBadge";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { site } from "@/config/site";
 import { projects } from "@/config/projects";
 import { experience } from "@/config/experience";
@@ -26,19 +28,19 @@ export default function HomePage() {
         />
 
         <div className="relative z-10 text-center px-6">
-          <h1
-            className="text-6xl sm:text-8xl lg:text-[9rem] leading-none tracking-tight text-fg"
-            style={{ fontFamily: "var(--font-dela)" }}
+          <HeroName name={site.name} />
+          {/* tagline fades in after the name resolves (~1.5 s) */}
+          <p
+            className="mt-5 text-lg sm:text-xl font-semibold text-fg-muted tracking-widest uppercase"
+            style={{ opacity: 0, animation: "fadeInUp 1.1s cubic-bezier(0.16,1,0.3,1) 2.15s forwards" }}
           >
-            {site.name}
-          </h1>
-          <p className="mt-5 text-lg sm:text-xl font-semibold text-fg-muted tracking-widest uppercase">
             {site.tagline}
           </p>
+          {/* CTA fades in slightly after the tagline */}
           <a
             href="#about"
-            className="mt-10 inline-block px-7 py-3 font-semibold text-sm border border-edge text-fg
-                       hover:bg-surface transition-colors duration-150"
+            className="mt-10 inline-block px-7 py-3 font-semibold text-sm border border-edge text-fg hover:bg-surface transition-colors duration-150"
+            style={{ opacity: 0, animation: "fadeInUp 1.1s cubic-bezier(0.16,1,0.3,1) 2.5s forwards" }}
           >
             Learn more ↓
           </a>
@@ -48,32 +50,35 @@ export default function HomePage() {
       {/* ── ABOUT ────────────────────────────────────────────────────── */}
       <section id="about" className="bg-bg border-t border-edge py-28 px-6 md:px-16 lg:px-24">
         <div className="max-w-4xl mx-auto">
-          <SectionHeading>About</SectionHeading>
-          <p className="mt-6 text-base md:text-lg leading-relaxed text-fg-muted">
-            {site.bio}
-          </p>
+          <ScrollReveal>
+            <SectionHeading>About</SectionHeading>
+            <p className="mt-6 text-base md:text-lg leading-relaxed text-fg-muted">
+              {site.bio}
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* ── SKILLS ───────────────────────────────────────────────────── */}
       <section id="skills" className="bg-bg border-t border-edge py-28 px-6 md:px-16 lg:px-24">
         <div className="max-w-4xl mx-auto">
-          <SectionHeading>Skills</SectionHeading>
+          <ScrollReveal>
+            <SectionHeading>Skills</SectionHeading>
+          </ScrollReveal>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {skills.map((group) => (
-              <div
-                key={group.category}
-                className="p-5 border border-edge bg-surface"
-              >
-                <h3 className="text-xs font-black uppercase tracking-widest text-fg-muted mb-3">
-                  {group.category}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <TechBadge key={item} name={item} />
-                  ))}
+            {skills.map((group, i) => (
+              <ScrollReveal key={group.category} delay={i * 75}>
+                <div className="p-5 border border-edge bg-surface h-full">
+                  <h3 className="text-xs font-black uppercase tracking-widest text-fg-muted mb-3">
+                    {group.category}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <TechBadge key={item} name={item} />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -82,31 +87,32 @@ export default function HomePage() {
       {/* ── PROJECTS ─────────────────────────────────────────────────── */}
       <section id="projects" className="bg-bg border-t border-edge py-28 px-6 md:px-16 lg:px-24">
         <div className="max-w-4xl mx-auto">
-          <SectionHeading>Projects</SectionHeading>
+          <ScrollReveal>
+            <SectionHeading>Projects</SectionHeading>
+          </ScrollReveal>
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            {projects.map((project) => (
-              <article
-                key={project.name}
-                className="p-5 border border-edge bg-surface"
-              >
-                <h3 className="text-lg font-black leading-tight text-fg">{project.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-fg-muted">{project.description}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
-                    <TechBadge key={t} name={t} />
-                  ))}
-                </div>
-                {project.github && (
-                  <a
-                    className="mt-4 inline-block text-sm font-semibold underline underline-offset-2 text-fg-muted hover:text-accent transition-colors duration-150"
-                    href={project.github.toString()}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    View code →
-                  </a>
-                )}
-              </article>
+            {projects.map((project, i) => (
+              <ScrollReveal key={project.name} delay={i * 90}>
+                <article className="p-5 border border-edge bg-surface h-full">
+                  <h3 className="text-lg font-black leading-tight text-fg">{project.name}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-fg-muted">{project.description}</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {project.tech.map((t) => (
+                      <TechBadge key={t} name={t} />
+                    ))}
+                  </div>
+                  {project.github && (
+                    <a
+                      className="mt-4 inline-block text-sm font-semibold underline underline-offset-2 text-fg-muted hover:text-accent transition-colors duration-150"
+                      href={project.github.toString()}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View code →
+                    </a>
+                  )}
+                </article>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -115,28 +121,29 @@ export default function HomePage() {
       {/* ── EXPERIENCE ───────────────────────────────────────────────── */}
       <section id="experience" className="bg-bg border-t border-edge py-28 px-6 md:px-16 lg:px-24">
         <div className="max-w-4xl mx-auto">
-          <SectionHeading>Experience</SectionHeading>
+          <ScrollReveal>
+            <SectionHeading>Experience</SectionHeading>
+          </ScrollReveal>
           <div className="mt-8 space-y-6">
-            {experience.map((job) => (
-              <div
-                key={`${job.role}-${job.company}`}
-                className="p-5 border border-edge bg-surface"
-              >
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="text-base font-black text-fg">
-                    {job.role}{" "}
-                    <span className="font-semibold text-accent">@ {job.company}</span>
-                  </h3>
-                  <span className="text-xs font-semibold border border-edge text-fg-muted px-2 py-0.5 bg-surface">
-                    {job.period}
-                  </span>
+            {experience.map((job, i) => (
+              <ScrollReveal key={`${job.role}-${job.company}`} delay={i * 90}>
+                <div className="p-5 border border-edge bg-surface">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <h3 className="text-base font-black text-fg">
+                      {job.role}{" "}
+                      <span className="font-semibold text-accent">@ {job.company}</span>
+                    </h3>
+                    <span className="text-xs font-semibold border border-edge text-fg-muted px-2 py-0.5 bg-surface">
+                      {job.period}
+                    </span>
+                  </div>
+                  <ul className="mt-3 space-y-1 list-disc list-inside text-sm leading-relaxed text-fg-muted">
+                    {job.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="mt-3 space-y-1 list-disc list-inside text-sm leading-relaxed text-fg-muted">
-                  {job.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
