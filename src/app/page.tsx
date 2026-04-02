@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { TechBadge } from "@/components/TechBadge";
 import { site } from "@/config/site";
 import { projects } from "@/config/projects";
 import { experience } from "@/config/experience";
@@ -69,12 +70,7 @@ export default function HomePage() {
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {group.items.map((item) => (
-                    <span
-                      key={item}
-                      className="px-2 py-0.5 text-xs font-semibold border border-edge text-fg-muted"
-                    >
-                      {item}
-                    </span>
+                    <TechBadge key={item} name={item} />
                   ))}
                 </div>
               </div>
@@ -97,12 +93,7 @@ export default function HomePage() {
                 <p className="mt-2 text-sm leading-relaxed text-fg-muted">{project.description}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2 py-0.5 text-xs font-semibold border border-edge text-fg-muted"
-                    >
-                      {t}
-                    </span>
+                    <TechBadge key={t} name={t} />
                   ))}
                 </div>
                 {project.github && (
