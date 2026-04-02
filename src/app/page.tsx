@@ -3,7 +3,6 @@ import { site } from "@/config/site";
 import { projects } from "@/config/projects";
 import { experience } from "@/config/experience";
 import { skills } from "@/config/skills";
-import { contact } from "@/config/contact";
 
 export default function HomePage() {
   return (
@@ -49,7 +48,7 @@ export default function HomePage() {
       <section id="about" className="bg-bg border-t border-edge py-28 px-6 md:px-16 lg:px-24">
         <div className="max-w-4xl mx-auto">
           <SectionHeading>About</SectionHeading>
-          <p className="mt-6 text-base md:text-lg leading-relaxed max-w-2xl text-fg-muted">
+          <p className="mt-6 text-base md:text-lg leading-relaxed text-fg-muted">
             {site.bio}
           </p>
         </div>
@@ -152,20 +151,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CONTACT ──────────────────────────────────────────────────── */}
-      <section id="contact" className="bg-bg border-t border-edge py-28 px-6 md:px-16 lg:px-24">
-        <div className="max-w-4xl mx-auto">
-          <SectionHeading>{contact.heading}</SectionHeading>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-fg-muted">{contact.body}</p>
-          <a
-            href={`mailto:${contact.email}`}
-            className="mt-8 inline-block px-7 py-3 font-semibold border border-edge bg-surface text-fg
-                       hover:text-accent transition-colors duration-200"
-          >
-            {contact.email}
-          </a>
-        </div>
-      </section>
     </>
   );
 }
